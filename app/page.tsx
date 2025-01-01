@@ -1,8 +1,4 @@
-import dynamic from "next/dynamic";
-// Carrega o componente que usa `canvas` apenas no cliente
-const ScreenRecorder = dynamic(() => import("./_components/ScreenRecorder"), {
-  ssr: false, // Desabilita a renderização no servidor
-});
+import ScreenRecorder from "./_components/ScreenRecorder";
 
 export default function Home() {
   return (
