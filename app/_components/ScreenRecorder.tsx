@@ -6,6 +6,7 @@ import Konva from "konva";
 import React, { useState, useRef, useEffect } from "react";
 import { Stage, Layer, Image as KonvaImage, Transformer } from "react-konva";
 import { ChevronLeft, ChevronRight, ScreenShare, Camera, Download, Circle } from "lucide-react";
+import dynamic from "next/dynamic";
 
 type MediaLayer = {
   id: string;
