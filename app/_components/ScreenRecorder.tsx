@@ -269,16 +269,19 @@ const ScreenRecorder: React.FC = () => {
           <Layer>
             {layers.map((layer) => (
               <KonvaImage
-                key={layer.id}
-                ref={(node) => (konvaImagesRef.current[layer.id] = node)}
-                x={layer.x}
-                y={layer.y}
-                width={layer.width}
-                height={layer.height}
-                onClick={() => selectLayer(layer.id)}
-                draggable
-                onDragMove={(e) => handleDragMove(e, layer.id)}
-              />
+		  key={layer.id}
+		  ref={(node) => {
+		    konvaImagesRef.current[layer.id] = node; // Armazena o nó no objeto de referência
+		  }}
+		  image={layer.videoElement}  // Adiciona a propriedade 'image' para o vídeo
+		  x={layer.x}
+		  y={layer.y}
+		  width={layer.width}
+		  height={layer.height}
+		  onClick={() => selectLayer(layer.id)}
+		  draggable
+		  onDragMove={(e) => handleDragMove(e, layer.id)}
+		/>
             ))}
           </Layer>
           <Layer>
