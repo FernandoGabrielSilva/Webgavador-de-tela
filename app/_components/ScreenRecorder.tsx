@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
+import Konva from "konva";
 import React, { useState, useRef, useEffect } from "react";
 import { Stage, Layer, Image as KonvaImage, Transformer } from "react-konva";
 import { ChevronLeft, ChevronRight, ScreenShare, Camera, Download, Circle } from "lucide-react";
@@ -220,10 +223,12 @@ const ScreenRecorder: React.FC = () => {
               <ScreenShare className="mr-2" />
               <span>Captura de Tela</span>
             </button>
+            {/*
             <button className="flex items-center mb-4 text-white" onClick={addCameraLayer}>
               <Camera className="mr-2" />
               <span>Câmera</span>
             </button>
+            */}
             <button
               onClick={() => (isRecording ? stopRecording() : startRecording())}
               className="flex items-center mb-4 text-white"
@@ -245,9 +250,11 @@ const ScreenRecorder: React.FC = () => {
             <button onClick={addScreenLayer} className="text-white">
               <ScreenShare />
             </button>
+            {/*
             <button onClick={addCameraLayer} className="text-white">
               <Camera />
             </button>
+            */}
             <button onClick={() => (isRecording ? stopRecording() : startRecording())} className="text-white">
               <Circle />
             </button>
@@ -269,19 +276,17 @@ const ScreenRecorder: React.FC = () => {
           <Layer>
             {layers.map((layer) => (
               <KonvaImage
-		  key={layer.id}
-		  ref={(node) => {
-		    konvaImagesRef.current[layer.id] = node; // Armazena o nó no objeto de referência
-		  }}
-		  image={layer.videoElement}  // Adiciona a propriedade 'image' para o vídeo
-		  x={layer.x}
-		  y={layer.y}
-		  width={layer.width}
-		  height={layer.height}
-		  onClick={() => selectLayer(layer.id)}
-		  draggable
-		  onDragMove={(e) => handleDragMove(e, layer.id)}
-		/>
+                key={layer.id}
+                ref={(node: Konva.Image | null) => { if (node) konvaImagesRef.current[layer.id] = node; }}
+                image={layer.videoElement}
+                x={layer.x}
+                y={layer.y}
+                width={layer.width}
+                height={layer.height}
+                onClick={() => selectLayer(layer.id)}
+                draggable
+                onDragMove={(e) => handleDragMove(e, layer.id)}
+              />
             ))}
           </Layer>
           <Layer>
